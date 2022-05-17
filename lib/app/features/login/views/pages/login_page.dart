@@ -1,9 +1,12 @@
 library login_page;
 
-import 'package:dev9lu_market_flutter/app/utils/ui/ui_utils.dart';
+import 'package:dev9lu_market_flutter/app/features/login/controllers/register_controller.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
+
+import 'package:dev9lu_market_flutter/app/features/login/controllers/login_controller.dart';
+import 'package:dev9lu_market_flutter/app/utils/ui/ui_utils.dart';
 // import 'dart:math';
 
 part '../components/background.dart';

@@ -7,9 +7,6 @@ class _LoginSheetView extends StatefulWidget {
   State<_LoginSheetView> createState() => _LoginSheetViewState();
 }
 
-final emailC = TextEditingController();
-final passC = TextEditingController();
-
 class _LoginSheetViewState extends State<_LoginSheetView> {
   @override
   Widget build(BuildContext context) {
@@ -24,25 +21,15 @@ class _LoginSheetViewState extends State<_LoginSheetView> {
               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               color: Colors.white),
           padding: const EdgeInsets.all(16.0),
-          child: ListView(controller: controller, children: [
-            _ElementsLogin(emailCtrl: emailC, passwordCtrl: passC)
-          ]),
+          child: ListView(controller: controller, children: [_ElementsLogin()]),
         ),
       ),
     );
   }
 }
 
-class _ElementsLogin extends StatelessWidget {
-  final TextEditingController emailCtrl;
-  final TextEditingController passwordCtrl;
-
-  const _ElementsLogin({
-    Key? key,
-    required this.emailCtrl,
-    required this.passwordCtrl,
-  }) : super(key: key);
-
+class _ElementsLogin extends GetView<LoginController> {
+  const _ElementsLogin({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -55,14 +42,14 @@ class _ElementsLogin extends StatelessWidget {
         AppCustomInput(
           icon: FontAwesomeIcons.envelope,
           placeholder: 'Enter your email...',
-          textController: emailCtrl,
+          textController: controller.emailCtrl,
           keyboarType: TextInputType.emailAddress,
         ),
         const SizedBox(width: double.infinity, child: Text('Password*')),
         AppCustomInput(
           icon: FontAwesomeIcons.lock,
           placeholder: 'Enter your password...',
-          textController: passwordCtrl,
+          textController: controller.passwordCtrl,
           keyboarType: TextInputType.text,
           isPassword: true,
         ),
@@ -71,18 +58,20 @@ class _ElementsLogin extends StatelessWidget {
           child: CustomBtn(
               width: double.infinity,
               height: 50,
-              onPressed: () {},
+              onPressed: () {
+                controller.login();
+              },
               color: Colors.black87,
               colorTx: Colors.white,
               txBtn: 'Login'),
         ),
-        const _FooterLogin(),
+        _FooterLogin(),
       ]),
     );
   }
 }
 
-class _FooterLogin extends StatelessWidget {
+class _FooterLogin extends GetView<LoginController> {
   const _FooterLogin({
     Key? key,
   }) : super(key: key);
@@ -94,7 +83,7 @@ class _FooterLogin extends StatelessWidget {
       MaterialButton(
           child: const Text('Sign Up'),
           onPressed: () {
-            Navigator.of(context).pop();
+            controller.goToRegisterSheet(context, _RegisterSheetView());
           })
     ]);
   }

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:dev9lu_market_flutter/app/features/login/bindings/login_binding.dart';
+
 import 'package:dev9lu_market_flutter/app/features/authentication/views/pages/authentication_page.dart';
 import 'package:dev9lu_market_flutter/app/features/home/views/screens/home_page.dart';
 import 'package:dev9lu_market_flutter/app/features/login/views/pages/login_page.dart';
@@ -13,7 +15,10 @@ abstract class AppPages {
 
   static final routes = [
     GetPage(name: _Paths.splash, page: () => const SplashPage()),
-    GetPage(name: _Paths.login, page: () => const LoginPage()),
+    GetPage(
+        name: _Paths.login,
+        page: () => const LoginPage(),
+        binding: LoginBinding()),
     GetPage(name: _Paths.registration, page: () => const RegistrationPage()),
     GetPage(
         name: _Paths.authentication, page: () => const AuthenticationPage()),

@@ -7,8 +7,6 @@ class _RegisterSheetView extends StatefulWidget {
   State<_RegisterSheetView> createState() => _BoxRegisterSheet();
 }
 
-final generiC = TextEditingController();
-
 class _BoxRegisterSheet extends State<_RegisterSheetView> {
   @override
   Widget build(BuildContext context) {
@@ -23,20 +21,17 @@ class _BoxRegisterSheet extends State<_RegisterSheetView> {
               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               color: Colors.white),
           padding: const EdgeInsets.all(16.0),
-          child: ListView(
-              controller: controller,
-              children: [_ElementsRegister(controller: generiC)]),
+          child:
+              ListView(controller: controller, children: [_ElementsRegister()]),
         ),
       ),
     );
   }
 }
 
-class _ElementsRegister extends StatelessWidget {
-  final TextEditingController controller;
+class _ElementsRegister extends GetView<RegisterController> {
   const _ElementsRegister({
     Key? key,
-    required this.controller,
   }) : super(key: key);
 
   @override
@@ -52,35 +47,35 @@ class _ElementsRegister extends StatelessWidget {
         AppCustomInput(
           icon: FontAwesomeIcons.userAstronaut,
           placeholder: 'Enter your name...',
-          textController: controller,
+          textController: controller.nameCtrl,
           keyboarType: TextInputType.text,
         ),
         const SizedBox(width: double.infinity, child: Text('Phone Number*')),
         AppCustomInput(
           icon: FontAwesomeIcons.phone,
           placeholder: 'Enter your phone Number...',
-          textController: controller,
+          textController: controller.phoneCtrl,
           keyboarType: TextInputType.phone,
         ),
         const SizedBox(width: double.infinity, child: Text('Email*')),
         AppCustomInput(
           icon: FontAwesomeIcons.envelope,
           placeholder: 'Enter your email...',
-          textController: controller,
+          textController: controller.emailCtrl,
           keyboarType: TextInputType.emailAddress,
         ),
         const SizedBox(width: double.infinity, child: Text('Password*')),
         AppCustomInput(
           icon: FontAwesomeIcons.lock,
           placeholder: 'Enter your password...',
-          textController: controller,
+          textController: controller.passwordCtrl,
           keyboarType: TextInputType.text,
           isPassword: true,
         ),
         AppCustomInput(
           icon: FontAwesomeIcons.lock,
           placeholder: 'Corfirm your password...',
-          textController: controller,
+          textController: controller.confirmPassCtrl,
           keyboarType: TextInputType.text,
           isPassword: true,
         ),
@@ -89,7 +84,9 @@ class _ElementsRegister extends StatelessWidget {
           child: CustomBtn(
               width: double.infinity,
               height: 50,
-              onPressed: () {},
+              onPressed: () {
+                controller.register();
+              },
               color: Colors.black87,
               colorTx: Colors.white,
               txBtn: 'Sign Up'),
@@ -100,7 +97,7 @@ class _ElementsRegister extends StatelessWidget {
   }
 }
 
-class _FooterRegister extends StatelessWidget {
+class _FooterRegister extends GetView<RegisterController> {
   const _FooterRegister({
     Key? key,
   }) : super(key: key);
@@ -109,7 +106,11 @@ class _FooterRegister extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       const Text('Already a have a account?'),
-      MaterialButton(child: const Text('Login'), onPressed: () {})
+      MaterialButton(
+          child: const Text('Login'),
+          onPressed: () {
+            controller.goToLoginSheet(context, _LoginSheetView());
+          })
     ]);
   }
 }
