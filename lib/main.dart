@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:dev9lu_market_flutter/app/config/routes/app_pages.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
