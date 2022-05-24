@@ -1,3 +1,5 @@
+import 'package:dev9lu_market_flutter/app/utils/services/models/response_api.dart';
+import 'package:dev9lu_market_flutter/app/utils/services/providers/users_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,13 +7,22 @@ class LoginController extends GetxController {
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
 
-  void login() {
+  UsersProvider usersProvider = UsersProvider();
+
+  void login() async {
     String email = emailCtrl.text.trim();
     String password = passwordCtrl.text.trim();
 
     print('Email: ${email}, pass: ${password}');
     if (isValidForm(email, password)) {
-      Get.snackbar('Form valido', 'Peticion Http');
+      ResponseApi responseApi = await usersProvider.login(email, password);
+      print('Response Api ${responseApi.toJson()}');
+
+      if (responseApi.success == true) {
+        Get.snackbar('Login Exitoso', responseApi.message ?? '');
+      } else {
+        Get.snackbar('Login Fallido', responseApi.message ?? '');
+      }
     }
   }
 
