@@ -15,23 +15,25 @@ class User {
   String? phone;
   String? image;
   String? password;
+  String? sessionToken;
 
-  User({
-    this.id,
-    this.email,
-    this.name,
-    this.phone,
-    this.image,
-    this.password,
-  });
+  User(
+      {this.id,
+      this.email,
+      this.name,
+      this.phone,
+      this.image,
+      this.password,
+      this.sessionToken});
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
+        id: json["id"].toString(),
         email: json["email"],
         name: json["name"],
         phone: json["phone"],
         image: json["image"],
         password: json["password"],
+        sessionToken: json["session"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,5 +43,6 @@ class User {
         "phone": phone,
         "image": image,
         "password": password,
+        "session": sessionToken,
       };
 }

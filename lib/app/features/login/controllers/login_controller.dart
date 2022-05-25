@@ -1,7 +1,9 @@
+import 'package:dev9lu_market_flutter/app/config/routes/app_pages.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/models/response_api.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/providers/users_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
   TextEditingController emailCtrl = TextEditingController();
@@ -19,6 +21,8 @@ class LoginController extends GetxController {
       print('Response Api ${responseApi.toJson()}');
 
       if (responseApi.success == true) {
+        GetStorage().write('user', responseApi.data);
+        goToHomePage();
         Get.snackbar('Login Exitoso', responseApi.message ?? '');
       } else {
         Get.snackbar('Login Fallido', responseApi.message ?? '');
@@ -49,5 +53,9 @@ class LoginController extends GetxController {
         isScrollControlled: true,
         context: context,
         builder: (context) => child);
+  }
+
+  void goToHomePage() {
+    Get.toNamed(Routes.home);
   }
 }

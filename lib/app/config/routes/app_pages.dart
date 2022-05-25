@@ -1,3 +1,4 @@
+import 'package:dev9lu_market_flutter/app/features/home/bindings/home_binding.dart';
 import 'package:get/get.dart';
 
 import 'package:dev9lu_market_flutter/app/features/login/bindings/login_binding.dart';
@@ -22,6 +23,9 @@ abstract class AppPages {
     GetPage(name: _Paths.registration, page: () => const RegistrationPage()),
     GetPage(
         name: _Paths.authentication, page: () => const AuthenticationPage()),
-    GetPage(name: _Paths.home, page: () => const HomePage()),
+    GetPage(
+        name: _Paths.home,
+        page: () => const HomePage(),
+        binding: HomeBinding()),
   ];
 }
