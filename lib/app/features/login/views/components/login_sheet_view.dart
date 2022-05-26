@@ -110,7 +110,7 @@ Widget _textTitleLogin() {
 
 Widget _lineSeparator() {
   return Container(
-      margin: EdgeInsets.only(bottom: Get.height * 0.1),
+      margin: EdgeInsets.only(bottom: Get.height * 0.08),
       width: 50,
       height: 3,
       color: Colors.black38);

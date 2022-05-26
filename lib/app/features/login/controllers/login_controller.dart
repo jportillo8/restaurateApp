@@ -57,6 +57,6 @@ class LoginController extends GetxController {
   }
 
   void goToHomePage() {
-    Get.toNamed(Routes.home);
+    Get.offNamedUntil(Routes.home, (route) => false);
   }
 }

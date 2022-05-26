@@ -41,8 +41,20 @@ class _ElementsRegister extends GetView<RegisterController> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(children: [
         _lineSeparator(),
-        _textTitleRegister(),
-        _textSubtitleRegister(),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _userImage(),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                _textTitleRegister(),
+                _textSubtitleRegister(),
+              ])
+            ],
+          ),
+        ),
         const SizedBox(width: double.infinity, child: Text('Name*')),
         CustomInput(
           icon: FontAwesomeIcons.userAstronaut,
@@ -116,22 +128,15 @@ class _FooterRegister extends GetView<RegisterController> {
 }
 
 Widget _textSubtitleRegister() {
-  return Container(
-    alignment: Alignment.bottomLeft,
-    padding: const EdgeInsets.only(bottom: 30, top: 10),
-    child: const Text('register your data ',
-        style: TextStyle(
-            color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 15)),
-  );
+  return const Text('register your data ',
+      style: TextStyle(
+          color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 15));
 }
 
 Widget _textTitleRegister() {
-  return Container(
-    alignment: Alignment.bottomLeft,
-    child: const Text('Create an Accout',
-        style: TextStyle(
-            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25)),
-  );
+  return const Text('Create an Accout',
+      style: TextStyle(
+          color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25));
 }
 
 Widget _makeDismissibleRegister({required Widget child, required context}) =>
@@ -140,3 +145,22 @@ Widget _makeDismissibleRegister({required Widget child, required context}) =>
       onTap: () => Navigator.of(context).pop(),
       child: GestureDetector(onTap: () {}, child: child),
     );
+
+class _userImage extends StatelessWidget {
+  const _userImage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: Get.width * 0.25,
+      height: Get.width * 0.25,
+      child: CircleAvatar(
+        backgroundColor: Colors.lightBlue,
+        child: Image.asset(
+          'assets/images/delivery01.png',
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+}
