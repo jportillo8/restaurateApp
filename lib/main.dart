@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     print(userSession.id);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: userSession.id != null ? Routes.home : Routes.login,
+      initialRoute: AppPages.initial,
       title: 'Dev9lu Market',
       getPages: AppPages.routes,
     );

@@ -1,5 +1,6 @@
 import 'package:dev9lu_market_flutter/app/features/home/bindings/home_binding.dart';
 import 'package:dev9lu_market_flutter/app/features/home/views/pages/home_page.dart';
+import 'package:dev9lu_market_flutter/app/utils/services/models/user.dart';
 import 'package:get/get.dart';
 
 import 'package:dev9lu_market_flutter/app/features/login/bindings/login_binding.dart';
@@ -8,13 +9,14 @@ import 'package:dev9lu_market_flutter/app/features/authentication/views/pages/au
 import 'package:dev9lu_market_flutter/app/features/login/views/pages/login_page.dart';
 import 'package:dev9lu_market_flutter/app/features/registration/views/pages/registration_page.dart';
 import 'package:dev9lu_market_flutter/app/features/splash/views/pages/splash_page.dart';
+import 'package:get_storage/get_storage.dart';
 
 part 'app_routes.dart';
 
-// User userSession = User.fromJson(GetStorage().read('user') ?? {});
+User userSession = User.fromJson(GetStorage().read('user') ?? {});
 
 abstract class AppPages {
-  // static final initial = userSession.id != null ? Routes.home : Routes.login;
+  static final initial = userSession.id != null ? Routes.home : Routes.login;
   static final routes = [
     GetPage(name: _Paths.splash, page: () => const SplashPage()),
     GetPage(
