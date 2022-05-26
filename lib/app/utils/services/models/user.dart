@@ -27,7 +27,7 @@ class User {
       this.sessionToken});
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"].toString(),
+        id: json["id"],
         email: json["email"],
         name: json["name"],
         phone: json["phone"],

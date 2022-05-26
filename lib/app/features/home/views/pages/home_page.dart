@@ -9,13 +9,15 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     controller.initialized;
     return Container(
-      color: Colors.white,
+      color: Colors.amber,
       alignment: Alignment.center,
       child: Column(
         children: [
-          const Text('Home Page'),
+          const Text('Home PageX'),
           MaterialButton(
-              child: Text('Logout'), onPressed: () => controller.logout())
+              color: Colors.white,
+              child: Text('Logout'),
+              onPressed: () => controller.logout())
         ],
       ),
     );
