@@ -44,35 +44,35 @@ class _ElementsRegister extends GetView<RegisterController> {
         _textTitleRegister(),
         _textSubtitleRegister(),
         const SizedBox(width: double.infinity, child: Text('Name*')),
-        AppCustomInput(
+        CustomInput(
           icon: FontAwesomeIcons.userAstronaut,
           placeholder: 'Enter your name...',
           textController: controller.nameCtrl,
           keyboarType: TextInputType.text,
         ),
         const SizedBox(width: double.infinity, child: Text('Phone Number*')),
-        AppCustomInput(
+        CustomInput(
           icon: FontAwesomeIcons.phone,
           placeholder: 'Enter your phone Number...',
           textController: controller.phoneCtrl,
           keyboarType: TextInputType.phone,
         ),
         const SizedBox(width: double.infinity, child: Text('Email*')),
-        AppCustomInput(
+        CustomInput(
           icon: FontAwesomeIcons.envelope,
           placeholder: 'Enter your email...',
           textController: controller.emailCtrl,
           keyboarType: TextInputType.emailAddress,
         ),
         const SizedBox(width: double.infinity, child: Text('Password*')),
-        AppCustomInput(
+        CustomInput(
           icon: FontAwesomeIcons.lock,
           placeholder: 'Enter your password...',
           textController: controller.passwordCtrl,
           keyboarType: TextInputType.text,
           isPassword: true,
         ),
-        AppCustomInput(
+        CustomInput(
           icon: FontAwesomeIcons.lock,
           placeholder: 'Corfirm your password...',
           textController: controller.confirmPassCtrl,

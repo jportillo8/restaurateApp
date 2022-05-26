@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
-  TextEditingController nameCtrl = TextEditingController();
-  TextEditingController phoneCtrl = TextEditingController();
-  TextEditingController emailCtrl = TextEditingController();
-  TextEditingController passwordCtrl = TextEditingController();
-  TextEditingController confirmPassCtrl = TextEditingController();
+  final nameCtrl = TextEditingController();
+  final phoneCtrl = TextEditingController();
+  final emailCtrl = TextEditingController();
+  final passwordCtrl = TextEditingController();
+  final confirmPassCtrl = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
 
   void register() async {
-    String name = nameCtrl.text;
-    String phone = phoneCtrl.text.trim();
-    String email = emailCtrl.text.trim();
-    String password = passwordCtrl.text.trim();
-    String confirmPass = confirmPassCtrl.text.trim();
+    final String name = nameCtrl.text;
+    final String phone = phoneCtrl.text.trim();
+    final String email = emailCtrl.text.trim();
+    final String password = passwordCtrl.text.trim();
+    final String confirmPass = confirmPassCtrl.text.trim();
 
     print(
         'Email: ${email}, pass: ${password}, Name: ${name}, phone: ${phone}, confirmPass: ${confirmPass}');
@@ -25,7 +25,7 @@ class RegisterController extends GetxController {
     if (isValidForm(name, phone, email, password, confirmPass)) {
       User user =
           User(email: email, name: name, phone: phone, password: password);
-      Response response = await usersProvider.create(user);
+      final Response response = await usersProvider.create(user);
 
       print('RESPONSE: ${response.body}');
 

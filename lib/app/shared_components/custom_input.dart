@@ -1,13 +1,13 @@
 part of ui_utils;
 
-class AppCustomInput extends StatelessWidget {
+class CustomInput extends StatelessWidget {
   final IconData icon;
   final String placeholder;
   final TextEditingController textController;
   final TextInputType keyboarType;
   final bool isPassword;
 
-  const AppCustomInput(
+  const CustomInput(
       {Key? key,
       required this.icon,
       required this.placeholder,

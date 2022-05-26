@@ -15,7 +15,7 @@ class UsersProvider extends GetConnect {
   }
 
   Future<ResponseApi> login(String email, String password) async {
-    Response response = await post(
+    final Response response = await post(
         urlLogin, {'email': email, 'password': password},
         headers: {'Content-Type': 'application/json'});
 
@@ -23,7 +23,7 @@ class UsersProvider extends GetConnect {
       Get.snackbar('Error', 'No se pudo ejecutar la peticion');
       return ResponseApi();
     }
-    ResponseApi responseApi = ResponseApi.fromMap(response.body);
+    final ResponseApi responseApi = ResponseApi.fromMap(response.body);
     return responseApi;
   }
 }

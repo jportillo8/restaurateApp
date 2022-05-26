@@ -6,18 +6,19 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
-  TextEditingController emailCtrl = TextEditingController();
-  TextEditingController passwordCtrl = TextEditingController();
+  final emailCtrl = TextEditingController();
+  final passwordCtrl = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
 
   void login() async {
-    String email = emailCtrl.text.trim();
-    String password = passwordCtrl.text.trim();
+    final String email = emailCtrl.text.trim();
+    final String password = passwordCtrl.text.trim();
 
     print('Email: ${email}, pass: ${password}');
     if (isValidForm(email, password)) {
-      ResponseApi responseApi = await usersProvider.login(email, password);
+      final ResponseApi responseApi =
+          await usersProvider.login(email, password);
       print('Response Api ${responseApi.toJson()}');
 
       if (responseApi.success == true) {

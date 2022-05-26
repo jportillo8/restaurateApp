@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:dev9lu_market_flutter/app/features/login/controllers/login_controller.dart';
-import 'package:dev9lu_market_flutter/app/utils/ui/ui_utils.dart';
+import 'package:dev9lu_market_flutter/app/shared_components/shared_components.dart';
 // import 'dart:math';
 
 part '../components/background.dart';

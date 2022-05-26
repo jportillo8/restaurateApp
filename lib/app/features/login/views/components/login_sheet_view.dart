@@ -39,14 +39,14 @@ class _ElementsLogin extends GetView<LoginController> {
         _textTitleLogin(),
         _textSubtitleLogin(),
         const SizedBox(width: double.infinity, child: Text('Email*')),
-        AppCustomInput(
+        CustomInput(
           icon: FontAwesomeIcons.envelope,
           placeholder: 'Enter your email...',
           textController: controller.emailCtrl,
           keyboarType: TextInputType.emailAddress,
         ),
         const SizedBox(width: double.infinity, child: Text('Password*')),
-        AppCustomInput(
+        CustomInput(
           icon: FontAwesomeIcons.lock,
           placeholder: 'Enter your password...',
           textController: controller.passwordCtrl,
