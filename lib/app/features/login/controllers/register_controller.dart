@@ -74,6 +74,7 @@ class RegisterController extends GetxController {
     final XFile? image = await imagePicker.pickImage(source: imageSource);
     if (image != null) {
       imageFile = File(image.path);
+      update();
     }
   }
 

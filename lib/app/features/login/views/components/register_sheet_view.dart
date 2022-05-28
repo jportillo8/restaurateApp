@@ -156,20 +156,21 @@ class _UserImage extends GetView<RegisterController> {
         controller.showAlertDialog();
       },
       child: SizedBox(
-        width: Get.width * 0.25,
-        height: Get.width * 0.25,
-        child: CircleAvatar(
-            backgroundColor: Colors.lightBlue,
-            backgroundImage: controller.imageFile != null
-                ? FileImage(controller.imageFile!)
-                : null,
-            child: controller.imageFile != null
-                ? null
-                : const Icon(
-                    FontAwesomeIcons.userAstronaut,
-                    color: Colors.white,
-                  )),
-      ),
+          width: Get.width * 0.25,
+          height: Get.width * 0.25,
+          child: GetBuilder<RegisterController>(
+            builder: (controller) => CircleAvatar(
+                backgroundColor: Colors.lightBlue,
+                backgroundImage: controller.imageFile != null
+                    ? FileImage(controller.imageFile!)
+                    : null,
+                child: controller.imageFile != null
+                    ? null
+                    : const Icon(
+                        FontAwesomeIcons.userAstronaut,
+                        color: Colors.white,
+                      )),
+          )),
     );
   }
 }
