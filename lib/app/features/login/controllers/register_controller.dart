@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dev9lu_market_flutter/app/utils/services/models/user.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/providers/users_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterController extends GetxController {
   final nameCtrl = TextEditingController();
@@ -11,6 +14,9 @@ class RegisterController extends GetxController {
   final confirmPassCtrl = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
+
+  final ImagePicker imagePicker = ImagePicker();
+  File? imageFile;
 
   void register() async {
     final String name = nameCtrl.text;
@@ -62,5 +68,40 @@ class RegisterController extends GetxController {
         isScrollControlled: true,
         context: context,
         builder: (context) => child);
+  }
+
+  Future selectImage(ImageSource imageSource) async {
+    final XFile? image = await imagePicker.pickImage(source: imageSource);
+    if (image != null) {
+      imageFile = File(image.path);
+    }
+  }
+
+  void showAlertDialog() {
+    final galleryButton = ElevatedButton(
+        onPressed: () {
+          Get.back();
+          selectImage(ImageSource.gallery);
+        },
+        child: const Text('GALERIA'));
+    final cameraButton = ElevatedButton(
+        onPressed: () {
+          Get.back();
+          selectImage(ImageSource.camera);
+        },
+        child: const Text('CAMERA'));
+
+    // final alterDialog = AlertDialog(
+    //   title: const Text('Selecciona una opcion'),
+    //   actions: [galleryButton, cameraButton],
+    // );
+    Get.defaultDialog(
+        title: 'Selecciona una opcion', actions: [galleryButton, cameraButton]);
+
+    // showDialog(
+    //     context: context,
+    //     builder: (BuildContext context) {
+    //       return alterDialog;
+    //     });
   }
 }

@@ -47,7 +47,7 @@ class _ElementsRegister extends GetView<RegisterController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _userImage(),
+              _UserImage(),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 _textTitleRegister(),
                 _textSubtitleRegister(),
@@ -146,20 +146,29 @@ Widget _makeDismissibleRegister({required Widget child, required context}) =>
       child: GestureDetector(onTap: () {}, child: child),
     );
 
-class _userImage extends StatelessWidget {
-  const _userImage({Key? key}) : super(key: key);
+class _UserImage extends GetView<RegisterController> {
+  const _UserImage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: Get.width * 0.25,
-      height: Get.width * 0.25,
-      child: CircleAvatar(
-        backgroundColor: Colors.lightBlue,
-        child: Image.asset(
-          'assets/images/delivery01.png',
-          fit: BoxFit.contain,
-        ),
+    return GestureDetector(
+      onTap: () {
+        controller.showAlertDialog();
+      },
+      child: SizedBox(
+        width: Get.width * 0.25,
+        height: Get.width * 0.25,
+        child: CircleAvatar(
+            backgroundColor: Colors.lightBlue,
+            backgroundImage: controller.imageFile != null
+                ? FileImage(controller.imageFile!)
+                : null,
+            child: controller.imageFile != null
+                ? null
+                : const Icon(
+                    FontAwesomeIcons.userAstronaut,
+                    color: Colors.white,
+                  )),
       ),
     );
   }
