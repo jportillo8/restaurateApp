@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dev9lu_market_flutter/app/utils/services/models/response_api.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/models/user.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/providers/users_provider.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +32,10 @@ class RegisterController extends GetxController {
     if (isValidForm(name, phone, email, password, confirmPass)) {
       User user =
           User(email: email, name: name, phone: phone, password: password);
-      final Response response = await usersProvider.create(user);
 
-      print('RESPONSE: ${response.body}');
-
+      final ResponseApi response =
+          await usersProvider.createUserWithImage(user, imageFile!);
+      print('RESPONSE: ${response.data}');
       Get.snackbar('Form valido', 'Peticion Http');
     }
   }
