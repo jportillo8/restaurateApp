@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:path/path.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' show basename;
 
 import 'package:get/get.dart';
 
@@ -32,21 +33,30 @@ class UsersProvider extends GetConnect {
     return responseApi;
   }
 
-  Future<ResponseApi> createUserWithImage(User user, File image) async {
-    final FormData form = FormData({
-      'image': MultipartFile(image, filename: basename(image.path)),
-      'user': json.encode(user)
-    });
+  Future<Stream> createUserWithImage(User user, File image) async {
+    final Uri uri = Uri.http(ApiPath.API_URL_OLD, '/api/users/createWithImage');
+    final request = http.MultipartRequest('POST', uri);
+    request.files.add(http.MultipartFile(
+        'image', http.ByteStream(image.openRead().cast()), await image.length(),
+        filename: basename(image.path)));
 
-    final Response response = await post(urlRegister, form);
-    print(response.body);
-    print(form.fields);
-    print(response.hasError);
-    if (response.body == null) {
-      Get.snackbar('Error', 'No se pudo ejecutar la peticion');
-      return ResponseApi();
-    }
-    final ResponseApi responseApi = ResponseApi.fromMap(response.body);
-    return responseApi;
+    request.fields['user'] = json.encode(user);
+    final response = await request.send();
+    return response.stream.transform(utf8.decoder);
   }
+
+  // Future<ResponseApi> createUserWithImageGetx(User user, File image) async {
+  //   final FormData form = FormData({
+  //     'image': MultipartFile(image, filename: basename(image.path)),
+  //     'user': json.encode(user)
+  //   });
+
+  //   final Response response = await post(urlRegister, form);
+  //   if (response.body == null) {
+  //     Get.snackbar('Error', 'No se pudo ejecutar la peticion');
+  //     return ResponseApi();
+  //   }
+  //   final ResponseApi responseApi = ResponseApi.fromMap(response.body);
+  //   return responseApi;
+  // } //ImageQuality in 5
 }

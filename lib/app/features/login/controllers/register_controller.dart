@@ -1,10 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:dev9lu_market_flutter/app/config/routes/app_pages.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/models/response_api.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/models/user.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/providers/users_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RegisterController extends GetxController {
@@ -26,17 +29,22 @@ class RegisterController extends GetxController {
     final String password = passwordCtrl.text.trim();
     final String confirmPass = confirmPassCtrl.text.trim();
 
-    print(
-        'Email: ${email}, pass: ${password}, Name: ${name}, phone: ${phone}, confirmPass: ${confirmPass}');
-
     if (isValidForm(name, phone, email, password, confirmPass)) {
-      User user =
+      final user =
           User(email: email, name: name, phone: phone, password: password);
 
-      final ResponseApi response =
+      final Stream stream =
           await usersProvider.createUserWithImage(user, imageFile!);
-      print('RESPONSE: ${response.data}');
-      Get.snackbar('Form valido', 'Peticion Http');
+      stream.listen((res) {
+        final ResponseApi responseApi = ResponseApi.fromMap(json.decode(res));
+
+        if (responseApi.success == true) {
+          GetStorage().write('user', responseApi.data);
+          goToHomePage();
+        } else {
+          Get.snackbar('Registro fallido', responseApi.message ?? '');
+        }
+      });
     }
   }
 
@@ -59,6 +67,11 @@ class RegisterController extends GetxController {
       Get.snackbar('Formulario no valido', 'Password no coinciden');
       return false;
     }
+    if (imageFile == null) {
+      Get.snackbar(
+          'Formulario no valido', 'Debes seleccionar una imagen de perfil');
+      return false;
+    }
     return true;
   }
 
@@ -72,7 +85,8 @@ class RegisterController extends GetxController {
   }
 
   Future selectImage(ImageSource imageSource) async {
-    final XFile? image = await imagePicker.pickImage(source: imageSource);
+    final XFile? image =
+        await imagePicker.pickImage(source: imageSource, imageQuality: 5);
     if (image != null) {
       imageFile = File(image.path);
       update();
@@ -105,5 +119,9 @@ class RegisterController extends GetxController {
     //     builder: (BuildContext context) {
     //       return alterDialog;
     //     });
+  }
+
+  void goToHomePage() {
+    Get.offNamedUntil(Routes.home, (route) => false);
   }
 }
