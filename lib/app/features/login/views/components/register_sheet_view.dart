@@ -97,7 +97,7 @@ class _ElementsRegister extends GetView<RegisterController> {
               width: double.infinity,
               height: 50,
               onPressed: () {
-                controller.register();
+                controller.register(context);
               },
               color: Colors.black87,
               colorTx: Colors.white,

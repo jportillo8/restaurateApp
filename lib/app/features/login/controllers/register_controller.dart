@@ -6,9 +6,12 @@ import 'package:dev9lu_market_flutter/app/utils/services/models/response_api.dar
 import 'package:dev9lu_market_flutter/app/utils/services/models/user.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/providers/users_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sn_progress_dialog/completed.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 class RegisterController extends GetxController {
   final nameCtrl = TextEditingController();
@@ -22,7 +25,7 @@ class RegisterController extends GetxController {
   final ImagePicker imagePicker = ImagePicker();
   File? imageFile;
 
-  void register() async {
+  void register(BuildContext context) async {
     final String name = nameCtrl.text;
     final String phone = phoneCtrl.text.trim();
     final String email = emailCtrl.text.trim();
@@ -30,18 +33,32 @@ class RegisterController extends GetxController {
     final String confirmPass = confirmPassCtrl.text.trim();
 
     if (isValidForm(name, phone, email, password, confirmPass)) {
+      ProgressDialog progressDialog = ProgressDialog(context: context);
+      progressDialog.show(
+          progressType: ProgressType.valuable,
+          max: 100,
+          msg: 'Registrando datos...',
+          completed: Completed(
+            completedMsg: 'Registro Completo',
+            completedImage: AssetImage('assets/images/delivery01.png'),
+            closedDelay: 5000,
+          ));
+
       final user =
           User(email: email, name: name, phone: phone, password: password);
 
       final Stream stream =
           await usersProvider.createUserWithImage(user, imageFile!);
-      stream.listen((res) {
+      stream.listen((res) async {
         final ResponseApi responseApi = ResponseApi.fromMap(json.decode(res));
 
         if (responseApi.success == true) {
+          progressDialog.update(value: 100);
+          await Future.delayed(const Duration(milliseconds: 2000));
           GetStorage().write('user', responseApi.data);
           goToHomePage();
         } else {
+          progressDialog.close();
           Get.snackbar('Registro fallido', responseApi.message ?? '');
         }
       });
