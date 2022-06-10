@@ -6,6 +6,7 @@ class Routes {
   static const registration = _Paths.registration;
   static const authentication = _Paths.authentication;
   static const home = _Paths.home;
+  static const roles = _Paths.roles;
 }
 
 abstract class _Paths {
@@ -14,4 +15,5 @@ abstract class _Paths {
   static const registration = '/registration/';
   static const authentication = '/authentication/';
   static const home = '/home/';
+  static const roles = '/roles/';
 }

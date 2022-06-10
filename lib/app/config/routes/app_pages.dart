@@ -1,5 +1,7 @@
 import 'package:dev9lu_market_flutter/app/features/home/bindings/home_binding.dart';
 import 'package:dev9lu_market_flutter/app/features/home/views/pages/home_page.dart';
+import 'package:dev9lu_market_flutter/app/features/roles/bindings/roles_binding.dart';
+import 'package:dev9lu_market_flutter/app/features/roles/views/pages/roles_page.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/models/user.dart';
 import 'package:get/get.dart';
 
@@ -30,5 +32,9 @@ abstract class AppPages {
         name: _Paths.home,
         page: () => const HomePage(),
         binding: HomeBinding()),
+    GetPage(
+        name: _Paths.roles,
+        page: () => const RolesPage(),
+        binding: RolesBinding()),
   ];
 }

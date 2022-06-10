@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:dev9lu_market_flutter/app/utils/services/models/rol.dart';
+
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
 String userToJson(User data) => json.encode(data.toJson());
@@ -16,6 +18,7 @@ class User {
   String? image;
   String? password;
   String? sessionToken;
+  List<Rol>? roles = [];
 
   User(
       {this.id,
@@ -24,7 +27,8 @@ class User {
       this.phone,
       this.image,
       this.password,
-      this.sessionToken});
+      this.sessionToken,
+      this.roles});
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -34,6 +38,9 @@ class User {
         image: json["image"],
         password: json["password"],
         sessionToken: json["session"],
+        roles: json["roles"] == null
+            ? []
+            : List<Rol>.from(json["roles"].map((model) => Rol.fromMap(model))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,5 +51,6 @@ class User {
         "image": image,
         "password": password,
         "session": sessionToken,
+        "roles": roles,
       };
 }
