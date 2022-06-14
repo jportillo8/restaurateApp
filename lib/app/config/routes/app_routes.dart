@@ -7,6 +7,11 @@ class Routes {
   static const authentication = _Paths.authentication;
   static const home = _Paths.home;
   static const roles = _Paths.roles;
+
+  //
+  static const clientProductsList = _Paths.clientProductsList;
+  static const deliveryOrdersList = _Paths.deliveryOrdersList;
+  static const restaurantOrdersList = _Paths.restaurantOrdersList;
 }
 
 abstract class _Paths {
@@ -16,4 +21,8 @@ abstract class _Paths {
   static const authentication = '/authentication/';
   static const home = '/home/';
   static const roles = '/roles/';
+  //
+  static const clientProductsList = '/clientProductsList/';
+  static const deliveryOrdersList = '/deliveryOrdersList/';
+  static const restaurantOrdersList = '/restaurantOrdersList/';
 }

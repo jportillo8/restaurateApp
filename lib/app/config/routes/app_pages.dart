@@ -1,5 +1,8 @@
+import 'package:dev9lu_market_flutter/app/features/client/bindings/client_binding.dart';
+import 'package:dev9lu_market_flutter/app/features/delivery/bindings/delivery_bindings.dart';
 import 'package:dev9lu_market_flutter/app/features/home/bindings/home_binding.dart';
 import 'package:dev9lu_market_flutter/app/features/home/views/pages/home_page.dart';
+import 'package:dev9lu_market_flutter/app/features/restaurant/views/pages/restaurant_orders_list_page.dart';
 import 'package:dev9lu_market_flutter/app/features/roles/bindings/roles_binding.dart';
 import 'package:dev9lu_market_flutter/app/features/roles/views/pages/roles_page.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/models/user.dart';
@@ -7,6 +10,9 @@ import 'package:get/get.dart';
 
 import 'package:dev9lu_market_flutter/app/features/login/bindings/login_binding.dart';
 
+import 'package:dev9lu_market_flutter/app/features/restaurant/bindings/restaurant_binding.dart';
+import 'package:dev9lu_market_flutter/app/features/delivery/views/pages/delivery_orders_list_page.dart';
+import 'package:dev9lu_market_flutter/app/features/client/views/pages/client_products_list_page.dart';
 import 'package:dev9lu_market_flutter/app/features/authentication/views/pages/authentication_page.dart';
 import 'package:dev9lu_market_flutter/app/features/login/views/pages/login_page.dart';
 import 'package:dev9lu_market_flutter/app/features/registration/views/pages/registration_page.dart';
@@ -36,5 +42,22 @@ abstract class AppPages {
         name: _Paths.roles,
         page: () => const RolesPage(),
         binding: RolesBinding()),
+
+    //
+
+    GetPage(
+        name: _Paths.clientProductsList,
+        page: () => const ClientProductsListPage(),
+        binding: ClientBinding()),
+
+    GetPage(
+        name: _Paths.deliveryOrdersList,
+        page: () => const DeliveryOrdersListPage(),
+        binding: DeliveryBinding()),
+
+    GetPage(
+        name: _Paths.restaurantOrdersList,
+        page: () => const RestaurantOrdersListPage(),
+        binding: RestaurantBinding()),
   ];
 }

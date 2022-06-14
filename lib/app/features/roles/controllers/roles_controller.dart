@@ -4,4 +4,8 @@ import 'package:get_storage/get_storage.dart';
 
 class RolesController extends GetxController {
   User user = User.fromJson(GetStorage().read('user') ?? {});
+
+  void goToPageRol(String route) {
+    Get.toNamed(route);
+  }
 }

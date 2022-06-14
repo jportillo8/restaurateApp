@@ -34,27 +34,35 @@ class RolesPage extends GetView<RolesController> {
                 delegate: SliverChildBuilderDelegate(
               childCount: roles!.length,
               (context, index) => _RoleItem(
-                  imageUrl: roles[index].image!, name: roles[index].name!),
+                imageUrl: roles[index].image!,
+                name: roles[index].name!,
+                route: roles[index].route!,
+              ),
             )),
           ],
         ));
   }
 }
 
-class _RoleItem extends StatelessWidget {
-  const _RoleItem({
-    Key? key,
-    required this.imageUrl,
-    required this.name,
-  }) : super(key: key);
+class _RoleItem extends GetView<RolesController> {
+  const _RoleItem(
+      {Key? key,
+      required this.imageUrl,
+      required this.name,
+      required this.route})
+      : super(key: key);
 
   final String imageUrl;
   final String name;
+  final String route;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (() => print(name)),
+      onTap: (() {
+        print(name);
+        controller.goToPageRol(route);
+      }),
       child: Container(
         decoration: const BoxDecoration(shape: BoxShape.circle),
         width: Get.width * 0.22,
@@ -103,3 +111,5 @@ class _RoleItem extends StatelessWidget {
     );
   }
 }
+
+// TODO falta optimizar este codigo
