@@ -6,7 +6,6 @@ import 'package:dev9lu_market_flutter/app/utils/services/models/response_api.dar
 import 'package:dev9lu_market_flutter/app/utils/services/models/user.dart';
 import 'package:dev9lu_market_flutter/app/utils/services/providers/users_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -56,7 +55,9 @@ class RegisterController extends GetxController {
           progressDialog.update(value: 100);
           await Future.delayed(const Duration(milliseconds: 2000));
           GetStorage().write('user', responseApi.data);
-          goToHomePage();
+
+          User myUser = User.fromJson(GetStorage().read('user') ?? {});
+          myUser.roles!.length > 1 ? goToRolesPage() : goToClientProductPage();
         } else {
           progressDialog.close();
           Get.snackbar('Registro fallido', responseApi.message ?? '');
@@ -138,7 +139,11 @@ class RegisterController extends GetxController {
     //     });
   }
 
-  void goToHomePage() {
-    Get.offNamedUntil(Routes.home, (route) => false);
+  void goToClientProductPage() {
+    Get.offNamedUntil(Routes.clientProductsList, (route) => false);
+  }
+
+  void goToRolesPage() {
+    Get.offNamedUntil(Routes.roles, (route) => false);
   }
 }

@@ -24,7 +24,11 @@ part 'app_routes.dart';
 User userSession = User.fromJson(GetStorage().read('user') ?? {});
 
 abstract class AppPages {
-  static final initial = userSession.id != null ? Routes.home : Routes.login;
+  static final initial = userSession.id != null
+      ? userSession.roles!.length > 1
+          ? Routes.roles
+          : Routes.clientProductsList
+      : Routes.login;
   static final routes = [
     GetPage(name: _Paths.splash, page: () => const SplashPage()),
     GetPage(
