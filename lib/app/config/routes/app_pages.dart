@@ -1,4 +1,5 @@
 import 'package:dev9lu_market_flutter/app/features/client/bindings/client_binding.dart';
+import 'package:dev9lu_market_flutter/app/features/client/views/pages/client_profile_update_page.dart';
 import 'package:dev9lu_market_flutter/app/features/delivery/bindings/delivery_bindings.dart';
 import 'package:dev9lu_market_flutter/app/features/home/bindings/home_binding.dart';
 import 'package:dev9lu_market_flutter/app/features/home/views/pages/home_page.dart';
@@ -21,23 +22,35 @@ import 'package:get_storage/get_storage.dart';
 
 part 'app_routes.dart';
 
+/* Data de Usuario*/
 User userSession = User.fromJson(GetStorage().read('user') ?? {});
 
 abstract class AppPages {
+  /* Navegacion condicional */
   static final initial = userSession.id != null
       ? userSession.roles!.length > 1
           ? Routes.roles
           : Routes.clientProductsList
       : Routes.login;
+
+  /* Rutas de navegacion */
   static final routes = [
-    GetPage(name: _Paths.splash, page: () => const SplashPage()),
+    GetPage(
+      name: _Paths.splash,
+      page: () => const SplashPage(),
+    ),
     GetPage(
         name: _Paths.login,
         page: () => const LoginPage(),
         binding: LoginBinding()),
-    GetPage(name: _Paths.registration, page: () => const RegistrationPage()),
     GetPage(
-        name: _Paths.authentication, page: () => const AuthenticationPage()),
+      name: _Paths.registration,
+      page: () => const RegistrationPage(),
+    ),
+    GetPage(
+      name: _Paths.authentication,
+      page: () => const AuthenticationPage(),
+    ),
     GetPage(
         name: _Paths.home,
         page: () => const HomePage(),
@@ -63,5 +76,11 @@ abstract class AppPages {
         name: _Paths.restaurantOrdersList,
         page: () => const RestaurantOrdersListPage(),
         binding: RestaurantBinding()),
+    //
+
+    GetPage(
+        name: _Paths.update,
+        page: () => const ClientProfileUpdatePage(),
+        binding: ClientBinding()),
   ];
 }

@@ -5,8 +5,11 @@ class RestaurantOrdersListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Restaurante Orders List'),
+    return Container(
+      color: Colors.greenAccent,
+      child: const Center(
+        child: Text('Restaurante Orders List'),
+      ),
     );
   }
 }

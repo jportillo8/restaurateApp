@@ -41,6 +41,7 @@ class LoginPage extends StatelessWidget {
                       Spacer(flex: 1),
                       _HeaderText(),
                       Spacer(flex: 3),
+                      /* Dos paginas arrastrables Login y Registro. */
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30),
                         child: _ButtonDraggable(

@@ -7,7 +7,7 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.initialized;
+    Get.put(HomeController());
     return Container(
       color: Colors.amber,
       alignment: Alignment.center,

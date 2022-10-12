@@ -6,6 +6,7 @@ class RolesController extends GetxController {
   User user = User.fromJson(GetStorage().read('user') ?? {});
 
   void goToPageRol(String route) {
+    // TODO Cambiar por offName
     Get.toNamed(route);
   }
 }

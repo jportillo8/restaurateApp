@@ -6,10 +6,15 @@ import 'package:get_storage/get_storage.dart';
 class ClientProductsListController extends GetxController {
   User user = User.fromJson(GetStorage().read('user') ?? {});
 
+  var indexTab = 0.obs;
+
+  void changeTab(int index) {
+    this.indexTab.value = index;
+  }
+
   void logout() async {
     final userData = GetStorage();
     userData.remove('user');
-    print('Usuario de el controller ${user.id}');
     goToLoginPage();
   }
 

@@ -1,5 +1,6 @@
 part of login_page;
 
+/* Vista arrastrable - Login de Usuario */
 class _LoginSheetView extends StatefulWidget {
   const _LoginSheetView({Key? key}) : super(key: key);
 
@@ -38,6 +39,7 @@ class _ElementsLogin extends GetView<LoginController> {
         _lineSeparator(),
         _textTitleLogin(),
         _textSubtitleLogin(),
+        /* Campos de formularios */
         const SizedBox(width: double.infinity, child: Text('Email*')),
         CustomInput(
           icon: FontAwesomeIcons.envelope,
@@ -59,6 +61,7 @@ class _ElementsLogin extends GetView<LoginController> {
               width: double.infinity,
               height: 50,
               onPressed: () {
+                /* Interacion con el backend */
                 controller.login();
               },
               color: Colors.black87,

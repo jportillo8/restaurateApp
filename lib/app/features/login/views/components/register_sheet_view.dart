@@ -1,5 +1,6 @@
 part of login_page;
 
+/* Vista arrastrable - Registro de Usuario */
 class _RegisterSheetView extends StatefulWidget {
   const _RegisterSheetView({Key? key}) : super(key: key);
 
@@ -55,6 +56,7 @@ class _ElementsRegister extends GetView<RegisterController> {
             ],
           ),
         ),
+        /* Campos de formularios */
         const SizedBox(width: double.infinity, child: Text('Name*')),
         CustomInput(
           icon: FontAwesomeIcons.userAstronaut,
@@ -97,6 +99,7 @@ class _ElementsRegister extends GetView<RegisterController> {
               width: double.infinity,
               height: 50,
               onPressed: () {
+                /* Interacion con el backend */
                 controller.register(context);
               },
               color: Colors.black87,
@@ -139,13 +142,6 @@ Widget _textTitleRegister() {
           color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25));
 }
 
-Widget _makeDismissibleRegister({required Widget child, required context}) =>
-    GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => Navigator.of(context).pop(),
-      child: GestureDetector(onTap: () {}, child: child),
-    );
-
 class _UserImage extends GetView<RegisterController> {
   const _UserImage({Key? key}) : super(key: key);
 
@@ -174,3 +170,10 @@ class _UserImage extends GetView<RegisterController> {
     );
   }
 }
+
+Widget _makeDismissibleRegister({required Widget child, required context}) =>
+    GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => Navigator.of(context).pop(),
+      child: GestureDetector(onTap: () {}, child: child),
+    );
