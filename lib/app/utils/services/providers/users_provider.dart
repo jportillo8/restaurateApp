@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' show basename;
 
@@ -10,6 +11,8 @@ import 'package:dev9lu_market_flutter/app/utils/services/models/response_api.dar
 import 'package:dev9lu_market_flutter/app/utils/services/models/user.dart';
 
 class UsersProvider extends GetConnect {
+  User userSesion = User.fromJson(GetStorage().read('user') ?? {});
+
   String url = '${ApiPath.API_URL}/users/create';
   String urlLogin = '${ApiPath.API_URL}/users/login';
   String urlUpdate = '${ApiPath.API_URL}/users/updateWithoutImage';
@@ -87,10 +90,22 @@ class UsersProvider extends GetConnect {
 
   // Datos sin imagen
   Future<ResponseApi> update(User user) async {
-    Response response = await put(urlUpdate, user.toJson(),
-        headers: {'Content-Type': 'application/json'});
+    print(userSesion.sessionToken!);
+    Response response = await put(
+      urlUpdate,
+      user.toJson(),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': userSesion.sessionToken ?? '',
+      },
+    );
     if (response.body == null) {
       Get.snackbar('Error', 'No se pudo actualizar el usuario');
+      return ResponseApi();
+    }
+    print(response.statusCode);
+    if (response.statusCode == 401) {
+      Get.snackbar('Error', 'No esta autorizado para realizar esta accion');
       return ResponseApi();
     }
 
@@ -102,6 +117,7 @@ class UsersProvider extends GetConnect {
   Future<Stream> updateUserWithImage(User user, File image) async {
     final Uri uri = Uri.http(ApiPath.API_URL_OLD, '/api/users/update');
     final request = http.MultipartRequest('PUT', uri);
+    request.headers['Authorization'] = userSesion.sessionToken ?? '';
     request.files.add(http.MultipartFile(
         'image', http.ByteStream(image.openRead().cast()), await image.length(),
         filename: basename(image.path)));
