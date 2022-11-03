@@ -12,96 +12,10 @@ class ClientProductsListPage extends GetView<ClientProductsListController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
-            // bottomNavigationBar: _bottomBar(),
-            body: Stack(
-          children: [
-            IndexedStack(
-              index: controller.indexTab.value,
-              children: [
-                RestaurantOrdersListPage(),
-                DeliveryOrdersListPage(),
-                ClientProfileInfoPage()
-              ],
-            ),
-            Positioned(
-              bottom: 15,
-              child:
-                  Container(height: 100, width: Get.width, child: _bottomBar()),
-            )
-          ],
-        )));
-
-    // Scaffold(
-    //     bottomNavigationBar: Obx(() => _bottomBar()),
-    //     body: Obx(() => IndexedStack(
-    //           index: controller.indexTab.value,
-    //           children: [
-    //             RestaurantOrdersListPage(),
-    //             DeliveryOrdersListPage(),
-    //             HomePage()
-    //           ],
-    //         )));
-  }
-
-  Widget _bottomBar() {
-    return CustomAnimatedBottomBar(
-      containerHeight: 80,
-      backgroundColor: Colors.lightBlue,
-      showElevation: true,
-      itemCornerRadius: 24,
-      curve: Curves.easeIn,
-      selectedIndex: controller.indexTab.value,
-      onItemSelected: (index) => controller.changeTab(index),
-      items: [
-        BottomNavyBarItem(
-            icon: Icon(FontAwesomeIcons.adn),
-            title: Text('Home'),
-            activeColor: Colors.white,
-            inactiveColor: Colors.black),
-        BottomNavyBarItem(
-            icon: Icon(FontAwesomeIcons.listCheck),
-            title: Text('Mis pedidos'),
-            activeColor: Colors.white,
-            inactiveColor: Colors.black),
-        BottomNavyBarItem(
-            icon: Icon(FontAwesomeIcons.userAstronaut),
-            title: Text('Perfil'),
-            activeColor: Colors.white,
-            inactiveColor: Colors.black)
-      ],
+    return Scaffold(
+      body: Center(
+        child: Text('CLIENT PRODUCTS LIST PAGE'),
+      ),
     );
   }
 }
-
-
-// TODO Actualizar
-// Obx(() => Scaffold(
-//         bottomNavigationBar: _bottomBar(),
-//         body: Stack(
-//           children: [
-//             IndexedStack(
-//               index: controller.indexTab.value,
-//               children: [
-//                 RestaurantOrdersListPage(),
-//                 DeliveryOrdersListPage(),
-//                 HomePage()
-//               ],
-//             ),
-//             Positioned(
-//               bottom: 30,
-//               child: Container(height: 100, width: 300, child: _bottomBar()),
-//             )
-//           ],
-//         )));
-
-// return Obx(() => Scaffold(
-//         bottomNavigationBar: _bottomBar(),
-//         body: IndexedStack(
-//           index: controller.indexTab.value,
-//           children: [
-//             RestaurantOrdersListPage(),
-//             DeliveryOrdersListPage(),
-//             ClientProfileInfoPage()
-//           ],
-//         )));

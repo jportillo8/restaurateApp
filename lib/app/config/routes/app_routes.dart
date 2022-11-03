@@ -11,8 +11,11 @@ class Routes {
   static const update = _Paths.update;
 
   //
+  static const clientHome = _Paths.clientHome;
   static const clientProductsList = _Paths.clientProductsList;
   static const deliveryOrdersList = _Paths.deliveryOrdersList;
+
+  static const restaurantHome = _Paths.restaurantHome;
   static const restaurantOrdersList = _Paths.restaurantOrdersList;
 }
 
@@ -25,8 +28,11 @@ abstract class _Paths {
   static const roles = '/roles/';
   static const update = '/update/';
 
-  //
+  //Cliente
+  static const clientHome = '/clientHome/';
   static const clientProductsList = '/clientProductsList/';
   static const deliveryOrdersList = '/deliveryOrdersList/';
+  //Restaurante
+  static const restaurantHome = '/restaurantHome/';
   static const restaurantOrdersList = '/restaurantOrdersList/';
 }

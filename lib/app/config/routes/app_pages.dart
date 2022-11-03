@@ -1,8 +1,10 @@
 import 'package:dev9lu_market_flutter/app/features/client/bindings/client_binding.dart';
+import 'package:dev9lu_market_flutter/app/features/client/views/pages/client_home_page.dart';
 import 'package:dev9lu_market_flutter/app/features/client/views/pages/client_profile_update_page.dart';
 import 'package:dev9lu_market_flutter/app/features/delivery/bindings/delivery_bindings.dart';
 import 'package:dev9lu_market_flutter/app/features/home/bindings/home_binding.dart';
 import 'package:dev9lu_market_flutter/app/features/home/views/pages/home_page.dart';
+import 'package:dev9lu_market_flutter/app/features/restaurant/views/pages/restaurant_home_page.dart';
 import 'package:dev9lu_market_flutter/app/features/restaurant/views/pages/restaurant_orders_list_page.dart';
 import 'package:dev9lu_market_flutter/app/features/roles/bindings/roles_binding.dart';
 import 'package:dev9lu_market_flutter/app/features/roles/views/pages/roles_page.dart';
@@ -30,7 +32,7 @@ abstract class AppPages {
   static final initial = userSession.id != null
       ? userSession.roles!.length > 1
           ? Routes.roles
-          : Routes.clientProductsList
+          : Routes.clientHome
       : Routes.login;
 
   /* Rutas de navegacion */
@@ -60,7 +62,11 @@ abstract class AppPages {
         page: () => const RolesPage(),
         binding: RolesBinding()),
 
-    //
+    //Cliente
+    GetPage(
+        name: _Paths.clientHome,
+        page: () => const ClientHomePage(),
+        binding: ClientBinding()),
 
     GetPage(
         name: _Paths.clientProductsList,
@@ -71,7 +77,11 @@ abstract class AppPages {
         name: _Paths.deliveryOrdersList,
         page: () => const DeliveryOrdersListPage(),
         binding: DeliveryBinding()),
-
+    //Restaurante
+    GetPage(
+        name: _Paths.restaurantHome,
+        page: () => const RestaurantHomePage(),
+        binding: RestaurantBinding()),
     GetPage(
         name: _Paths.restaurantOrdersList,
         page: () => const RestaurantOrdersListPage(),

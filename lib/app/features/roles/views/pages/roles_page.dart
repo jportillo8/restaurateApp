@@ -60,7 +60,7 @@ class _RoleItem extends GetView<RolesController> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (() {
-        print(name);
+        print(route);
         controller.goToPageRol(route);
       }),
       child: Container(
